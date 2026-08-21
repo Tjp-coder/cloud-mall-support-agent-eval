@@ -1,0 +1,22 @@
+# 密钥与本地配置
+.env
+.claude/settings.local.json
+
+# 向量库与运行产物
+chroma_db/
+eval/traces/
+eval/reports/*.tmp
+tmp/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 其他
+node_modules/
+.DS_Store
+
+# 仅保留在本地的个人面试/经历梳理
+doc/软通*.md
