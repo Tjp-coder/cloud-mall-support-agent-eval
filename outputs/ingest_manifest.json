@@ -1,0 +1,25 @@
+{
+  "run_at": "2026-08-22T01:57:21+08:00",
+  "baseline_name": "BASELINE-001",
+  "dry_run": false,
+  "collection": "cloud_mall_support_baseline",
+  "embedding_model": "text-embedding-v3",
+  "chunk_size": 600,
+  "chunk_overlap": 100,
+  "batch_size": 10,
+  "document_count": 8,
+  "chunk_count": 84,
+  "collection_count": 84,
+  "embedding_failure_count": 0,
+  "elapsed_seconds": 4.666,
+  "chunks_by_source": {
+    "data/kb/KB-01-容器.md": 14,
+    "data/kb/KB-02-告警.md": 8,
+    "data/kb/KB-03-返佣.md": 13,
+    "data/kb/KB-04-寄售.md": 8,
+    "data/kb/KB-05-开票.md": 10,
+    "data/kb/KB-06-算力券.md": 9,
+    "data/kb/KB-07-虚拟机.md": 8,
+    "data/kb/KB-08-订单与交付.md": 14
+  }
+}

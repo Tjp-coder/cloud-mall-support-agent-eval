@@ -20,7 +20,7 @@
 
 | # | 面试问题 | 达标线 | 数据落点 | 计划产出日 | 状态 | 当前值 |
 |---|---|---|---|---|---|---|
-| Q1 | 评测集怎么设计的，多少条、怎么分类 | 60/60 字段完整、8 模块全覆盖、检索类 40 条有 golden_contexts | `eval/dataset_v1.jsonl`、`TEST_PLAN.md` | D5 | [ ] | 待填 |
+| Q1 | 评测集怎么设计的，多少条、怎么分类 | 60/60 字段完整、8 模块全覆盖、检索类 40 条有 golden_contexts | `eval/dataset_v1.jsonl`、`TEST_PLAN.md` | D5 | [ ] | D1 检索 smoke 10/10 已完成；60 条评测集待 D4–D5 人工标注与冻结 |
 | Q2 | RAGAS 四指标基线分和调优后分是多少 | 四指标非 NaN，基线 v0 + 调优 v1 各有数字 | `baseline_v0.md`、`optimization_v1.md` | D8 | [ ] | 待填 |
 | Q3 | context_recall 为什么需要 golden_contexts | 60/60 字段完整，检索类 40 条非空，人工二轮评审通过 | `dataset_v1.jsonl` | D5 | [ ] | 待填 |
 | Q4 | 裁判模型可信度怎么验证 | 30 条人工校准完成，一致率 ≥85%，kappa ≥0.6 | `judge_calibration.md` | D9 | [ ] | 待填 |
