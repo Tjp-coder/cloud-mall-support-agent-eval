@@ -38,7 +38,16 @@ Copy-Item .env.example .env
 # 3. 重建 BASELINE-001 向量库并执行 10 条检索 smoke
 .\.venv\Scripts\python.exe scripts\ingest.py --rebuild
 .\.venv\Scripts\python.exe scripts\retrieval_smoke.py
+
+# 4. D2：单次问答或交互式 CLI
+.\.venv\Scripts\python.exe -m agent.cli --question "自动续费扣款失败后还会重试吗？"
+.\.venv\Scripts\python.exe -m agent.cli
+
+# 5. D2：执行 8 条库内 + 2 条库外问答 smoke
+.\.venv\Scripts\python.exe eval\harness\run_d2_smoke.py
 ```
+
+> `.env` 中必须配置 `DASHSCOPE_API_KEY`。`QWEN_API_KEY` 未单独配置时，D2 会复用同一个 DashScope key；密钥只保存在本地，不进入 Git。
 
 > Windows 基线环境固定为 Python 3.11。当前机器上的 Python 3.14 + Chroma 1.x 曾稳定复现原生层 access violation，因此未用于本项目基线。
 
@@ -48,6 +57,15 @@ Copy-Item .env.example .env
 - 配置：`text-embedding-v3`、`chunk_size=600`、`overlap=100`、`top_k=5`。
 - 自动 `source_hit@5`：10/10；平均耗时 194.0 ms（包含 query embedding 与本地 Chroma 检索）。
 - 逐条阅读完整 chunk 后，Top 5 语义相关 10/10（Codex 辅助复核）；RS-006 排序和 RS-008 内容覆盖记为 D7 观察项，D1 未临时调参。
+
+## D2 问答链
+
+- `agent/rag_agent.py`：Top 5 检索、受约束 Prompt、千问 OpenAI 兼容调用和延迟/Token 埋点。
+- `agent/cli.py`：单问题与交互式命令行入口。
+- `eval/harness/run_d2_smoke.py`：10 条问答批量执行，Trace 落本地 JSONL，人工复核报告写入 `outputs/smoke_v0.md`。
+- Prompt v0 要求仅依据上下文回答，库外拒答，信息不足时澄清，并保留“参考配置/可配置”等条件。
+- D2 实测：10/10 调用成功，Codex 辅助初审可接受 9/10，库外拒答 2/2；平均端到端延迟 2585.3 ms，输入/输出 Token 合计 17578/826。
+- 失败样本 D2-003：模型把“低于 7 折无返佣”过度扩写为“因此不生成返佣账单”；保留为 D6 全量基线的生成层观察项，D2 不临时调参。
 
 ## 关键资产
 
